@@ -445,6 +445,11 @@ a.tag i {
         display: none;
     }
 }
+@media screen and (max-width: 850px) {
+  .cyber-globe-widget {
+    display: none;
+  }
+}
 
 #skills ul {
     display: flex;
