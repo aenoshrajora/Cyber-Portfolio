@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aenosh Rajora</title>
+    <title>Aenosh Rajora | Offensive Security & Red Teaming</title>
+    <link rel="shortcut icon" href="/static/images/favicon/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
-        /* Custom CSS for positioning the widget */
         .widget-container {
             position: fixed;
             top: 50%;
@@ -17,35 +18,35 @@
     </style>
 </head>
 <body>
-    <!-- Background video -->
-    <video autoplay muted loop id="background-video">
-        <source src="{{ url_for('static', filename='videos/background.mp4') }}" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
+    <div class="bg-image"></div>
+    <canvas id="mouseTrail"></canvas>
     
     <div class="container">
-        <!-- Side menu -->
-        <div class="side-menu">
-            <ul>
-                <li><a href="#about">ABOUT</a></li>
-                <li><a href="#experience">EXPERIENCE</a></li>
-                <li><a href="#education">EDUCATION</a></li>
-                <li><a href="#skills">SKILLS</a></li>
-                <li><a href="#projects">PROJECTS</a></li>
-                <li><a href="#interests">INTERESTS</a></li>
-                <li><a href="#certifications">CERTIFICATIONS</a></li>
-            </ul>
-        </div>
-        
+
+        <nav class="cyber-nav" id="mainNav">
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#ctf">CTF</a></li>
+            <li><a href="#accomplishment">Accomplishment</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#certifications">Certification</a></li>
+        </ul>
+    </nav>
+
         <!-- Main content -->
         <div class="main-content">
-            <div class="header" id="about">
-                <h1>{{ resume.name }}</h1>
-                <h2>{{ resume.title }}</h2>
-                <p>Email: <a href="mailto:{{ resume.email }}">{{ resume.email }}</a></p>
-                <p>Location: {{ resume.location }}</p>
-                <h3>About</h3>
-                <p>{{ resume.about }}</p>
+            <div class="header" id="about"> 
+                <span class="tag">
+                    <h1>{{ resume.name }}</h1>
+                    <h2>{{ resume.title }}</h2>
+                    <p>Email: <a href="mailto:{{ resume.email }}">{{ resume.email }}</a></p>
+                    <p>Location: {{ resume.location }}</p>
+                    <h3>About</h3>
+                    <p>{{ resume.about }}</p>
+                </span>
             </div>
             
             <!-- Experience section -->
@@ -53,36 +54,39 @@
                 <h3>$ cat 'Experience'</h3>
                 <ul>
                     {% for exp in resume.experience %}
-                    <li style="margin-bottom: 20px;">
+                    <li style="margin-bottom: 20px;"> <span class="tag">
                         <strong>{{ exp.title }}</strong><br>
                         {{ exp.company }}, {{ exp.location }} ({{ exp.dates }})<br>
                         {{ exp.description }}
-                        <ul>
+                        <ul class="experience-bullets">
                             {% for point in exp.bullet_points %}
-                            <li>{{ point }}</li>
+                                <li>{{ point }}</li>
                             {% endfor %}
                         </ul>
+                    </span>
                     </li>
                     {% endfor %}
                 </ul>
             </div>
             
             <!-- Education section -->
-            <div class="section" id="education">
-                <h3>$ echo 'Education'</h3>
+            <div class="glass-box section" id="education">
+                <h3 class="animated-header">$ echo 'Education'</h3>
                 <ul>
                     {% for edu in resume.education %}
                     <li style="margin-bottom: 20px;">
+                        <span class="tag">
                         <strong>{{ edu.degree }}</strong> in {{ edu.major }}<br>
                         {{ edu.university }}, {{ edu.location }} ({{ edu.dates }})<br>
                         GPA: {{ edu.gpa }}
+                        </span>
                     </li>
                     {% endfor %}
                 </ul>
             </div>
             
             <!-- Skills section -->
-            <div class="section" id="skills">
+            <div class=" glass-box section" id="skills">
                 <h3>$ ls 'Skills'</h3>
                 <ul>
                     {% for category, skills in resume.skills.items() %}
@@ -97,52 +101,101 @@
                 </ul>
             </div>
 
-	 <!-- CTF section -->
-            <div class="section" id="ctf">
-                <h3>$ grep CTF's</h3>
+	        <!-- CTF section -->
+            <div class="glass-box section" id="ctf">
+                <h3 class="animated-header">$ grep CTF's</h3>
                 <ul>
                     {% for ctf in resume.ctf %}
-                    <li>{{ ctf }}</li>
+                    <li><span class="tag">{{ ctf }}</span></li>
                     {% endfor %}
                 </ul>
             </div>
 
-            
+          <!-- Accomplishment Section -->
+           <div class="glass-box section" id="accomplishment">
+              <h3 class="animated-header">$ grep Accomplishments</h3>
+              <ul>
+                  {% for accomplishment in resume.accomplishment %}
+                  <li><span class="tag">{{accomplishment}}</li></span>
+                  {% endfor %}
+              </ul>
+           </div>
             <!-- Projects section -->
-            <div class="section" id="projects">
+            <div class="glass-box section" id="projects">
                 <h3>$ find . -name 'Projects'</h3>
                 <ul>
-                    {% for project in resume.projects %}
-                    <li>
-                        {% if project.url %}
+                  {% for project in resume.projects %}
+                  <li>
+                    <span class="tag">
+                      $> 
+                      {% if project.url %}
                         <a href="{{ project.url }}" target="_blank">{{ project.name }}</a>
-                        {% else %}
+                      {% else %}
                         {{ project.name }}
-                        {% endif %}
-                    </li>
-                    {% endfor %}
+                      {% endif %}
+                    </span>
+                  </li>
+                  {% endfor %}
                 </ul>
+
             </div>
             
             <!-- Certifications section -->
-            <div class="section" id="certifications">
+            <div class="glass-box section" id="certifications">
                 <h3>$ locate 'Certifications'</h3>
                 <ul>
-                    {% for certification in resume.certifications %}
+                  {% for certification in resume.certifications %}
                     <li>
-                        {% if certification.url %}
-                        <a href="{{ certification.url }}" target="_blank">{{ certification.name }}</a> - {{ certification.company }}
-                        {% else %}
-                        {{ certification.name }} - {{ certification.company }}
-                        {% endif %}
+                      {% if certification.url %}
+                        <span class="tag">
+                          <a href="{{ certification.url }}" target="_blank">{{ certification.name }}</a> - {{ certification.company }}
+                        </span>
+                      {% else %}
+                        <span class="tag">{{ certification.name }} - {{ certification.company }}</span>
+                      {% endif %}
                     </li>
-                    {% endfor %}
+                  {% endfor %}
                 </ul>
+
             </div>
+          
+<div style="text-align: center; margin-top: 20px;">
+  <a href="{{ url_for('static', filename='src/resume.pdf') }}" target="_blank" class="tag">
+    📄 View / Download PDF Resume
+  </a>
+</div>
+
+<div style="text-align: center; margin-top: 20px;">
+  <a href="https://www.linkedin.com/in/aenosh-rajora/" class="tag" target="_blank">
+    <i class="fab fa-linkedin"></i> LinkedIn
+  </a>
+  <a href="https://twitter.com/yourprofile" class="tag" target="_blank">
+    <i class="fab fa-twitter"></i> Twitter
+  </a>
+  <a href="https://github.com/aenoshrajora/" class="tag" target="_blank">
+    <i class="fab fa-github"></i> GitHub
+  </a>
+  <a href="https://tryhackme.com/p/ShadowPacket" class="tag" target="_blank">
+    <i class="fas fa-terminal"></i> TryHackMe
+  </a>
+  <a href="https://app.hackthebox.com/profile/1214028" class="tag" target="_blank">
+    <i class="fas fa-skull-crossbones"></i> Hack The Box
+  </a>
+  <a href="https://medium.com/@aenoshrajora79/" class="tag" target="_blank">
+    <i class="fas fa-medium"></i>Medium
+  </a>
+</div>
+
         </div>
-<div class="widget-container">
-            <iframe width="370" height="370" src="https://cybermap.kaspersky.com/en/widget/dynamic/dark" frameborder="0"></iframe>
+        <div class="cyber-globe-widget">
+          <div class="globe-mask">
+            <div class="widget-header-cover"></div>
+            <iframe src="https://cybermap.kaspersky.com/en/widget/dynamic/dark" frameborder="0"></iframe>
+          </div>
         </div>
     </div>
 </body>
+
+<script src="https://cdn.jsdelivr.net/npm/typeit@8.7.1/dist/index.umd.js"></script>
+<script src="/static/script.js"></script>
 </html>

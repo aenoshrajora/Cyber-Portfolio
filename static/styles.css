@@ -1,11 +1,110 @@
+
 body {
     background-color: #191919;
-    color: #00f0bc;
+    color: #4ffa00;
     font-family: Consolas, 'Courier New', Courier, monospace;
     margin: 0;
     padding: 20px;
     animation: fadeIn 1s ease-in-out;
     font-size: large;
+    font-weight: bolder;
+}
+
+.glass-box {
+    background: rgba(25, 25, 25, 0.4);  /* Dark translucent bg */
+    border-radius: 15px;
+    padding: 20px;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px); /* Safari support */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 10px rgba(0, 255, 255, 0.1); /* Optional glow */
+    max-width: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: rgba(51, 51, 51, 0.4); /* 40% opacity */
+    border-radius: 8px;
+    backdrop-filter: blur(4px); /* Glassmorphism vibe */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+@media screen and (max-width: 850px) {
+  .cyber-globe-widget {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .side-menu {
+    display: none;
+  }
+
+  .main-content {
+    margin-left: 0;
+    padding: 20px;
+  }
+
+  .container {
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .glass-box {
+    margin: 10px 0;
+  }
+}
+
+#background-video::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Adjust darkness */
+    z-index: -1;
+}
+
+.video-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: -1;
+}
+
+ul li ul li {
+    display: inline-block;
+    margin: 5px 8px;
+    padding: 6px 10px;
+    background-color: rgba(51, 51, 51, 0.3);
+    border-radius: 8px;
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #ff006a;
+    font-size: 14px;
+    text-shadow: 0 0 3px rgba(0,255,255,0.3);
+}
+
+.tag {
+    display: inline-block;
+    margin: 5px 8px;
+    padding: 6px 10px;
+    background-color: rgba(51, 51, 51, 0.4);
+    border-radius: 8px;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #b3ff00;
+    font-size: 14px;
+    text-shadow: 0 0 3px rgba(0,255,255,0.4);
+    vertical-align: middle;
+
+}
+
+body, h1, h2, h3, p, a, li, ul {
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
 }
 
 @media (max-width: 768px) {
@@ -58,7 +157,7 @@ body {
 }
 
 .header h1 {
-    color: #ff4500;
+    color: #f500a3;
     margin-bottom: 20px;
     font-size: 36px;
 }
@@ -93,8 +192,8 @@ body {
 }
 
 .section h3 {
-    color: #ff4500;
-    border-bottom: 2px solid #ff4500;
+    color: #00ff88;
+    border-bottom: 2px solid #a000fd;
     padding-bottom: 5px;
     margin-bottom: 30px;
     font-size: 26px;
@@ -106,6 +205,7 @@ body {
         margin-bottom: 10px;
     }
 }
+
 
 .section p {
     margin-bottom: 20px;
@@ -119,27 +219,110 @@ body {
     }
 }
 
+#yt-bg-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  z-index: -2;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+#yt-player {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200vw;
+  height: 200vh;
+  pointer-events: none;
+}
+
+.bg-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: url("/static/images/background.jpg") center center / cover no-repeat;
+  z-index: -2;
+  pointer-events: none;
+}
+
+
 ul {
     list-style-type: none;
     padding: 0;
     margin: 0;
     text-align: left;
 }
-
-li::before {
-    content: "$>";
-    margin-right: 10px;
-    font-size: 18px;
-    color: #ff4500;
-    display: inline-block;
+.cyber-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 15px 60px;
+    z-index: 999;
+    backdrop-filter: blur(10px);
+    background: rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: center;
+    transition: top 0.3s;
 }
 
-a {
-    color: #00ff00;
+.cyber-nav ul {
+    list-style: none;
+    display: flex;
+    gap: 40px;
+}
+
+.cyber-nav li a {
+    color: #00ffee;
+    text-transform: uppercase;
+    font-weight: 700;
     text-decoration: none;
+    position: relative;
+    font-size: 14px;
+    letter-spacing: 1px;
+    transition: 0.3s ease-in-out;
+}
+
+.cyber-nav li a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 0%;
+    height: 2px;
+    background: #ff00ff;
+    transition: width 0.3s;
+}
+
+.cyber-nav li a:hover::after {
+    width: 100%;
+}
+
+#mouseTrail {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+}
+
+
+a {
+    color: #ff006a; /* brighter, more visible */
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.2s ease-in-out;
 }
 
 a:hover {
+    color: #ffab8c; /* matches your headers! */
     text-decoration: underline;
 }
 
@@ -176,13 +359,11 @@ a:hover {
 }
 
 .main-content {
-    width: calc(100% - 300px);
-    margin-left: 100px;
-    margin-right: 100px;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+    padding-left: 120px;
+    padding-right: 120px;
+    width: auto;
 }
+
 
 @media (max-width: 768px) {
     .main-content {
@@ -192,12 +373,71 @@ a:hover {
     }
 }
 
-.widget-container {
-    position: fixed;
-    top: 50%;
-    right: 20px;
-    transform: translateY(-50%);
-    z-index: 1000;
+.cyber-globe-widget {
+  position: fixed;
+  top: 50%;
+  right: 30px;
+  transform: translateY(-50%);
+  width: 360px;
+  height: 360px;
+  z-index: 999;
+  pointer-events: none;
+}
+
+.globe-mask {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 0 25px rgba(0, 255, 255, 0.3);
+  background: rgba(0, 0, 0, 0.2);
+  pointer-events: auto;
+}
+
+.globe-mask iframe {
+  width: 100%;
+  height: 100%;
+  transform: scale(1.1) translateY(-8%);
+  transform-origin: center;
+  border: none;
+}
+
+/* Top overlay to hide 'Kaspersky' header */
+.widget-header-cover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 50px;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 2;
+  pointer-events: none;
+  border-top-left-radius: 50%;
+  border-top-right-radius: 50%;
+}
+
+a.tag i {
+  margin-right: 6px;
+}
+
+.experience-bullets li {
+  margin: 6px 0;
+  padding-left: 12px;
+  color: #ff00f2;
+  list-style-type: "$ ";
+  font-family: 'Fira Code', monospace;
+  font-size: 15px;
+}
+
+.animated-header .ti-cursor {
+  color: #00ffff;
+  animation: blink 1s step-start infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
 }
 
 @media (max-width: 768px) {
@@ -213,32 +453,16 @@ a:hover {
     margin-left: -10px;
 }
 
+
 #skills ul li {
     margin: 5px 10px;
     padding: 5px 10px;
-    background-color: #333;
-    border-radius: 5px;
+    background-color: rgba(51, 51, 51, 0.4); /* 40% opacity */
+    border-radius: 8px;
+    backdrop-filter: blur(4px); /* Glassmorphism vibe */
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-#skills ul li strong {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-    color: #ff4500;
-}
-
-#skills ul li ul {
-    display: block;
-    margin-left: 0;
-}
-
-#skills ul li ul li {
-    display: inline-block;
-    background-color: transparent;
-    padding: 0;
-    margin: 0 5px 0 0;
-    border-radius: 0;
-}
 #background-video {
     position: fixed;
     top: 50%;
